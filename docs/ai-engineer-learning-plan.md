@@ -1,6 +1,6 @@
 # AI Engineer — 90-Day Learning Plan
 
-> **Status:** Not started · **Duration:** 90 days / ~280h · **Pace:** 20h+ per week
+> **Status:** In progress · **Duration:** 90 days / ~280h · **Pace:** 20h+ per week
 > **Goal:** Deepen skills, then decide · **Repos:** 6 pinned · 2 ecosystems · **Start applying:** Day 75
 
 ---
@@ -33,45 +33,17 @@ Five gap areas identified — four AI foundations plus enterprise Azure AI. The 
 ### Month 1 — Ecosystem Immersion
 *Python fluency · LLM internals · first real build · enterprise port. ~110h total.*
 
-#### Wk 1 · ~20h · Python ML idioms + LLM API fundamentals
+> **Note on actual sequence:** Wk 3 (first real RAG system) was completed on Day 1 before the theory weeks. Wk 1 and Wk 2 are being done now as theory catchup at the end of Week 1 calendar time. This is the better order — every concept in Wk 1 and Wk 2 now has a working implementation to anchor it. Skip the build tasks in both weeks; they're already done. Read everything else with the codebase open.
 
-- Python data structures for ML
-- NumPy / Pandas basics
-- Anthropic + OpenAI SDK (Python & TS)
-- Tokens, context, temperature
-- Streaming responses
-- Read LangChain docs
-- 🔨 **Build:** First API call — something real, not hello world
+---
 
-**Resources:**
-
-- `Course · Free` Full Stack LLM Bootcamp (Berkeley) — do this week 1 in parallel
-- `Docs` Anthropic Python SDK Quickstart
-- `Course · Short` DeepLearning.AI — ChatGPT Prompt Engineering for Devs
-- `Reference` Python for Data Analysis — Wes McKinney (ch 4–5 only)
-
-#### Wk 2 · ~20h · Embeddings, vector search, RAG theory
-
-- Embeddings as concept + cosine similarity
-- pgvector (you know Postgres already)
-- Pinecone / Weaviate overview
-- Chunking strategies
-- 🔨 **Build:** Embed a small corpus, run similarity search
-
-**Resources:**
-
-- `Course · Short` DeepLearning.AI — Building Systems with the ChatGPT API
-- `Course · Short` DeepLearning.AI — LangChain for LLM Application Dev
-- `Docs` Pinecone Quickstart + pgvector README
-- `Blog` "Chunking strategies for LLM apps" — Pinecone blog
-
-#### Wk 3 · ~25h · First real RAG system — end to end
+#### ✅ Wk 3 · ~25h · First real RAG system — end to end *(completed Day 1)*
 
 - Retrieval pipeline design
 - Reranking basics
 - LangChain / LlamaIndex hands-on
-- 🔨 **Build:** RAG over a real doc set
-- 🚀 **Ship:** working demo with UI
+- ✅ **Built:** RAG over a real doc set (p1-rag-typescript)
+- ✅ **Shipped:** Working demo with UI — Next.js chat, pgvector, Anthropic, AI SDK v6
 
 **Resources:**
 
@@ -79,6 +51,48 @@ Five gap areas identified — four AI foundations plus enterprise Azure AI. The 
 - `Framework` Vercel AI SDK — streaming RAG responses (TS-first, fits your stack)
 - `Docs` LlamaIndex — RAG from scratch guide
 - `Reference` LangChain Expression Language (LCEL) docs
+
+---
+
+#### 🔄 Wk 1 · ~8h · Python ML idioms + LLM API fundamentals *(theory catchup — build tasks done)*
+
+> *You've already wired up the Anthropic SDK, handled streaming, and debugged AI SDK v6 breaking changes. This week's reading explains the why behind what's already running. Skip the build task — it's done. Focus on the conceptual gaps: tokens, context windows, temperature, and the SDK patterns you used without fully mapping to theory yet.*
+
+- Python data structures for ML
+- NumPy / Pandas basics
+- Anthropic + OpenAI SDK (Python & TS)
+- Tokens, context, temperature
+- Streaming responses
+- Read LangChain docs
+- ~~🔨 Build: First API call~~ *(done — p1-rag-typescript)*
+
+**Resources:**
+
+- `Course · Free` Full Stack LLM Bootcamp (Berkeley) — do this in parallel
+- `Docs` Anthropic Python SDK Quickstart
+- `Course · Short` DeepLearning.AI — ChatGPT Prompt Engineering for Devs
+- `Reference` Python for Data Analysis — Wes McKinney (ch 4–5 only)
+
+---
+
+#### 🔄 Wk 2 · ~8h · Embeddings, vector search, RAG theory *(theory catchup — build tasks done)*
+
+> *You're already running text-embedding-3-small through pgvector. This week closes the conceptual gap: why cosine similarity works, what the embedding space actually represents, and — most importantly — why the chunking decisions you made in the ingestion pipeline matter. The Pinecone chunking blog is the essential read here. Open your ingestion script while you read it.*
+
+- Embeddings as concept + cosine similarity
+- pgvector (you know Postgres already)
+- Pinecone / Weaviate overview
+- Chunking strategies
+- ~~🔨 Build: Embed a small corpus, run similarity search~~ *(done — pgvector pipeline running)*
+
+**Resources:**
+
+- `Course · Short` DeepLearning.AI — Building Systems with the ChatGPT API
+- `Course · Short` DeepLearning.AI — LangChain for LLM Application Dev
+- `Docs` Pinecone Quickstart + pgvector README
+- `Blog` **"Chunking strategies for LLM apps" — Pinecone blog** *(essential — read with ingestion script open)*
+
+---
 
 #### Wk 3+ · ~21h · Enterprise RAG port — P1-CS
 
@@ -100,6 +114,8 @@ Five gap areas identified — four AI foundations plus enterprise Azure AI. The 
 
 > Why this week exists. Same RAG architecture, enterprise stack. Your 20yr C# depth means this is a translation exercise — you already understand every concept from P1. This one repo unlocks the entire .NET + AI freelance niche where most AI engineers can't compete.
 
+---
+
 #### Wk 4 · ~25h · Prompt engineering depth + basic evals
 
 - System prompt architecture
@@ -120,6 +136,8 @@ Five gap areas identified — four AI foundations plus enterprise Azure AI. The 
 `Python ML idioms` · `LLM APIs (Py + TS)` · `Embeddings` · `Vector DBs` · `RAG pipelines` · `Prompt engineering` · `Basic evals` · `LangChain / LlamaIndex` · `Semantic Kernel (C#)` · `Azure OpenAI` · `Azure AI Search`
 
 > **Deliverable —** Two production-quality RAG systems — one in TypeScript (P1), one in C# / Azure (P1-CS) — with a comparison README that articulates when to choose each stack. Both go on GitHub immediately. Eval harness runs in CI on the TS version. The C# version is your calling card for enterprise .NET clients.
+
+---
 
 ### Month 2 — Agents, Production & Depth
 *Multi-step agents · observability · production patterns · flagship project. ~90h total.*
@@ -190,6 +208,8 @@ Five gap areas identified — four AI foundations plus enterprise Azure AI. The 
 `ReAct agents` · `Multi-agent systems` · `LangSmith / Langfuse` · `Prompt versioning` · `Cost optimization` · `Guardrails` · `Production deployment` · `Evals in depth`
 
 > **Deliverable —** A flagship project that is live, deployed, and documented. Not a demo — a real system with evals, tracing, and a write-up. This is what you lead with in every conversation, interview, or proposal.
+
+---
 
 ### Month 3 — Positioning, Direction & Go-to-Market
 *Specialise · sharpen narrative · run a focused search — job or freelance. ~80h total.*
@@ -275,8 +295,8 @@ The clearest conceptual overview of agent architectures. Read before Week 5. lil
 
 Revisit at the end of each month. Update status as gaps close.
 
-- **Python / ML idioms** — Not started
-- **LLM APIs & prompting** — Not started
-- **RAG & vector DBs** — Not started
+- **Python / ML idioms** — In progress (Wk 1 catchup)
+- **LLM APIs & prompting** — In progress (Wk 1 catchup)
+- **RAG & vector DBs** — In progress (built Wk 3 first; Wk 2 theory catchup)
 - **Agents & orchestration** — Not started
 - **Azure AI / Semantic Kernel** — Not started

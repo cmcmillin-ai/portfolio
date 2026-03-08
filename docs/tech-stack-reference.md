@@ -29,7 +29,7 @@
 Required for ML ecosystem: HuggingFace, PEFT, LoRA fine-tuning (P4), evals with RAGAS. Closes in ~1 week given background. Use pyenv on macOS — never system Python. Syntax gap only, not a cognitive gap.  
 **Used:** Wk 1–2 ramp · P4 fine-tuning · RAGAS evals
 
-### C# / .NET 8 — `AZURE` `PRIMARY`
+### C# / .NET 10 — `AZURE` `PRIMARY`
 20+ years depth. Used in P1-CS (Enterprise RAG Port). Semantic Kernel is C#-native. The combination of C# + Azure + Semantic Kernel is a niche with very few competitors. VS Code and Rider both run well on macOS.  
 **Used:** P1-CS · Day 15–19 · Enterprise track
 
