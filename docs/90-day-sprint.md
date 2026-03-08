@@ -3,7 +3,7 @@
 > Senior Engineer → AI Engineer  
 > Not a curriculum. A targeted upskilling sprint for a 30-year engineer who already thinks in systems.
 
-**OS:** Windows 11 · WSL2 Ubuntu · **Stack:** TypeScript (10+ yrs) · C# (20+ yrs) · Python (learning) · **Target:** Day 75 → first applications · Day 90 → active pipeline
+**OS:** macOS (Apple Silicon) · **Stack:** TypeScript (10+ yrs) · C# (20+ yrs) · Python (learning) · **Target:** Day 75 → first applications · Day 90 → active pipeline
 
 ---
 
@@ -181,13 +181,13 @@
 
 ### Language Stack
 
-Windows + WSL2 gives you the best of both worlds — native C#/.NET and Azure tooling on Windows, full Unix Python/ML environment in WSL2 Ubuntu. TypeScript is your primary production language and runs comfortably in either context.
+macOS gives you a native Unix environment — no WSL, no workarounds. Python tooling, Docker, and the ML ecosystem all just work. TypeScript remains your primary production language.
 
 | Language | Status | Notes |
 |---|---|---|
 | **TypeScript** | Primary | Vercel AI SDK, Anthropic SDK — all excellent. Build P1–P3 and capstone. 10+ years is a competitive advantage most AI Engineer candidates don't have. |
-| **Python** | Learn | Runs exclusively in WSL2 Ubuntu — pyenv 2.6.25 and Python 3.12.3 already installed and confirmed. Never use native Windows Python for ML work. |
-| **C# / .NET** | Azure Primary | Semantic Kernel is C#-native. Runs natively on Windows. Current Upwork client is already C#/Azure — this is live client work, not just sprint prep. 20+ years is a genuine differentiator. |
+| **Python** | Learn | pyenv on macOS — never system Python. Closes in ~1 week. Use for data-heavy and ML-adjacent work. |
+| **C# / .NET** | Azure Primary | Semantic Kernel is C#-native. VS Code and Rider both run well on macOS. 20+ years is a genuine differentiator for Azure-focused roles. |
 
 ### Cloud Platform
 
@@ -205,25 +205,23 @@ Models: `claude-sonnet-4-6` · `claude-haiku-4-5` (speed)
 **OpenAI** — Fine-tuning + routing target. Best fine-tuning API for P4. Use `text-embedding-3-small` for all embeddings. Multi-model routing in P3 (Claude for reasoning, GPT-4o for speed) is a real production pattern worth demonstrating.  
 Models: `gpt-4o` · `text-embedding-3-small` · fine-tuning API
 
-**HuggingFace** — Open-source & fine-tuning internals. LoRA/QLoRA for P4. On Windows, use PyTorch + CUDA inside WSL2 — the RTX 5060 is CUDA-native and the entire PEFT ecosystem is built for it. Colab Pro (~£10/month) is the safety valve if 8GB VRAM hits a ceiling.  
-Stack: `PEFT / LoRA` · `PyTorch + CUDA (WSL2)` · `RTX 5060 · 8GB VRAM`
+**HuggingFace** — Open-source & fine-tuning internals. LoRA/QLoRA for P4. On Apple Silicon, use mlx-lm for local fine-tuning — it's optimised for unified memory and outperforms PyTorch/MPS for this use case. Colab Pro (~£10/month) is the safety valve for heavier runs that push past 16GB.  
+Stack: `PEFT / LoRA` · `mlx-lm (Apple Silicon)` · `Colab Pro (A100 fallback)`
 
 > **Tooling decision:** Vercel AI SDK over LangChain as primary TS abstraction. LangChain has a reputation problem in senior engineering circles. Use the Vercel AI SDK (streaming, tool use, multi-model routing in one clean package) and raw Anthropic/OpenAI SDKs where it doesn't reach. "I used the SDK directly to understand the tool-use loop without framework magic" is a strong interview answer.
 
 ---
 
-## Hardware & Environment — Confirmed Setup
+## Hardware & Environment
 
-> No new hardware needed. WSL2 Ubuntu 24.04 set up and confirmed — pyenv, Python 3.12, nvm, Node LTS all installed. VS Code with WSL extension connected. API keys in .env.local. Ready to start.
+> MacBook Pro M1 Pro 16GB is the primary sprint machine. Native Unix environment — Python tooling, Docker, and the ML ecosystem all work without workarounds. Homebrew → nvm → pyenv → dotnet → VS Code. Clean setup, half a day, zero cruft.
 
-| Machine | Role | Spec |
+| Machine | Role | Notes |
 |---|---|---|
-| **Windows Laptop** | Primary | Intel CPU · RTX 5060 (8GB GDDR7 VRAM) · 32GB RAM · WSL2 Ubuntu for Python/ML · Windows native for C#/.NET/Azure/SQL Server |
-| **MacBook Pro M1 Pro 16GB** | Side bet | Fresh macOS install, held in reserve. Free optionality. Ready to set up in an afternoon if needed. |
+| **MacBook Pro M1 Pro 16GB** | Primary | Current machine. Fully capable for P1–P3. P4 fine-tuning workable with mlx-lm + quantised models. |
 | **Google Colab Pro** | Safety valve | ~£10/month · A100 (40GB VRAM) · Subscribe at Day 55 when P4 starts. Don't pay for it during P1–P3. |
-| **Mac Mini / MacBook M5 Pro** | Deferred | Decision held until P4 if RTX 5060 VRAM ceiling becomes a real blocker. By then M5 Pro will have clear specs. |
 
-> **WSL2 boundary rule — non-negotiable:** All Python and ML work runs inside WSL2 Ubuntu. C#/.NET runs natively on Windows. TypeScript runs either side. Docker Desktop uses WSL2 backend. Crossing this boundary causes dependency conflicts — keep it clean.
+**Future upgrade path:** MacBook Pro upgrade or Mac Mini M4 Pro (48GB) would meaningfully expand local fine-tuning headroom for post-sprint work — 13B models unquantised, 7B with room to breathe. Not needed for the sprint; Colab Pro covers any gap. Worth revisiting after Day 90.
 
 ---
 

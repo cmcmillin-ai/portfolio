@@ -1,7 +1,7 @@
 # AI Engineer — Tech Stack Quick Reference
 
 > Compiled from: Learning Plan · 90-Day Sprint · Project Arc  
-> **Languages:** TS · Python · C# · **Cloud:** Azure primary / AWS secondary · **OS:** Windows 11 · WSL2 Ubuntu 24.04
+> **Languages:** TS · Python · C# · **Cloud:** Azure primary / AWS secondary · **OS:** macOS (Apple Silicon)
 
 ---
 
@@ -26,14 +26,14 @@
 **Used:** All projects · Sprint-wide
 
 ### Python — `LEARN`
-Required for ML ecosystem: HuggingFace, PEFT, LoRA fine-tuning (P4), evals with RAGAS. Closes in ~1 week given background. Run exclusively inside WSL2 Ubuntu — never native Windows Python. pyenv 2.6.25 + Python 3.12.3 installed and confirmed.  
+Required for ML ecosystem: HuggingFace, PEFT, LoRA fine-tuning (P4), evals with RAGAS. Closes in ~1 week given background. Use pyenv on macOS — never system Python. Syntax gap only, not a cognitive gap.  
 **Used:** Wk 1–2 ramp · P4 fine-tuning · RAGAS evals
 
 ### C# / .NET 8 — `AZURE` `PRIMARY`
-20+ years depth. Used in P1-CS (Enterprise RAG Port). Semantic Kernel is C#-native. The combination of C# + Azure + Semantic Kernel is a niche with very few competitors. Runs natively on Windows.  
+20+ years depth. Used in P1-CS (Enterprise RAG Port). Semantic Kernel is C#-native. The combination of C# + Azure + Semantic Kernel is a niche with very few competitors. VS Code and Rider both run well on macOS.  
 **Used:** P1-CS · Day 15–19 · Enterprise track
 
-> **Runtime setup (Windows + WSL2):** All Python/ML work runs inside WSL2 Ubuntu 24.04 — pyenv 2.6.25, Python 3.12.3, nvm 0.40.1, Node 24.14 LTS all confirmed. C#/.NET runs natively on Windows. TypeScript runs either side. Never use system Python on either platform.
+> **Runtime setup (macOS):** `nvm` for Node/TS · `pyenv` for Python (never system Python) · `dotnet sdk` via Homebrew for C# · All managed independently, no conflicts.
 
 ---
 
@@ -60,7 +60,7 @@ Managed GPT-4o / embedding deployment via Azure. How most enterprise companies c
 **Used:** P1-CS · enterprise track
 
 ### Mistral-7B / CodeLlama-7B — `LEARN`
-Open-source models for P4 LoRA fine-tuning. RTX 5060 with CUDA is well-suited — CUDA is what the fine-tuning ecosystem is built for. Run locally via PyTorch + CUDA in WSL2.  
+Open-source models for P4 LoRA fine-tuning. Run locally on macOS via mlx-lm (Apple Silicon optimised) or on Colab Pro for heavier runs. Fine-tuned specialist model vs GPT-4o cost comparison is the P4 punchline.  
 **Used:** P4 · fine-tuning · local inference
 
 > **Routing logic:** Sonnet for reasoning-heavy → Haiku for speed-sensitive → fine-tuned 7B for narrow domain tasks at low cost. Demonstrating this in P3/P4 is production thinking.
@@ -132,7 +132,7 @@ RAG-focused framework. Better document ingestion and retrieval abstractions than
 **Used:** Wk 3 · P1 RAG pipeline
 
 ### FastAPI — `LEARN`
-Python backend for AI services where TS isn't the right tool. Clean async API, auto-generated docs. Runs in WSL2.  
+Python backend for AI services where TS isn't the right tool. Clean async API, auto-generated docs. Native on macOS.  
 **Used:** Wk 8 flagship · Python backend option
 
 ### ASP.NET Minimal API — `AZURE`
@@ -202,20 +202,20 @@ Eval harness runs in CI on P1 TypeScript version. Automated quality gate on ever
 ## 07 · ML Tooling & Fine-Tuning
 
 ### HuggingFace PEFT — `LEARN`
-LoRA/QLoRA implementation for P4. Runs inside WSL2 Ubuntu via pyenv. CUDA-accelerated via the RTX 5060 — the ecosystem is built for this combination.  
-**Used:** Wk 9 · P4 fine-tuning track · WSL2 + CUDA
+LoRA/QLoRA implementation for P4. Python-native via pyenv on macOS. Use mlx-lm for local Apple Silicon runs, Colab Pro for heavier training jobs.  
+**Used:** Wk 9 · P4 fine-tuning track
 
-### PyTorch + CUDA — `PRIMARY`
-GPU-accelerated ML on Windows via WSL2. RTX 5060 with 8GB GDDR7 VRAM is CUDA-native. Genuine throughput advantage over Apple Silicon for training.  
-**Used:** P4 fine-tuning · WSL2 · CUDA 12.x
+### mlx-lm — `PRIMARY`
+Apple's ML framework for Apple Silicon. Optimised for unified memory — outperforms PyTorch/MPS for local fine-tuning on M-series Macs. Run Mistral-7B or CodeLlama locally for inference and fine-tuning. Python-native via pyenv.  
+**Used:** P4 local fine-tuning · Apple Silicon
 
 ### OpenAI Fine-Tuning API — `LEARN`
 Best fine-tuning API for P4. Mature tooling, JSONL dataset format. Fine-tuned GPT-4o-mini specialist vs full GPT-4o — cost/performance comparison is the P4 punchline.  
 **Used:** P4 · Day 55–69
 
 ### Google Colab Pro — `SECONDARY`
-Cloud GPU fallback if RTX 5060's 8GB VRAM ceiling bites on larger runs. ~£10/month. A100 with 40GB VRAM. Subscribe at Day 55 — don't pay for it during P1–P3.  
-**Used:** P4 safety valve · subscribe at Day 55
+Cloud GPU fallback for heavy LoRA runs that push past 16GB unified memory on the M1 Pro. ~£10/month. A100 with 40GB VRAM. Most practitioners use cloud for heavy fine-tuning regardless of local hardware. Subscribe at Day 55 — don't pay for it during P1–P3.  
+**Used:** P4 heavy training runs · safety valve
 
 ### NumPy / Pandas — `LEARN`
 Python data manipulation basics. Wk 1 (chapters 4–5 only). Enough to prepare fine-tuning datasets and parse eval outputs.  
@@ -240,8 +240,8 @@ Backend service hosting. Faster DX than AWS for sprint-pace deployment.
 **Used:** Wk 8 flagship · backend hosting
 
 ### Docker — `LEARN`
-Docker Desktop on Windows with WSL2 backend — already configured. SQL Server for Upwork client. AI sprint containers via WSL2 backend.  
-**Used:** P1-CS · Wk 8 · SQL Server · WSL2 backend
+Containerisation for P1-CS Azure deployment and Wk 8 flagship. Native on macOS — no Docker Desktop friction. Used in P1-CS to package the ASP.NET API.  
+**Used:** P1-CS · Wk 8 · containerised services
 
 ### GitHub / GitHub Actions — `PRIMARY`
 6 pinned repos are the portfolio. GitHub Actions for CI eval harness. Clean commit history and descriptive READMEs are the interview artefact.  
@@ -251,47 +251,34 @@ Docker Desktop on Windows with WSL2 backend — already configured. SQL Server f
 Used in P2 (PR Review Agent) to fetch PR diffs, comments, file trees. Real external tool integration in an agentic context.  
 **Used:** P2 · PR Review Agent · tool use
 
-### Windows Terminal + winget — `PRIMARY`
-Unified shell — PowerShell, CMD, and WSL2 Ubuntu all in one place. Already set up and working.  
-**Used:** Day 0 · already configured
+### Homebrew + zsh — `PRIMARY`
+macOS package manager. Manages git, nvm, pyenv, dotnet, docker, and all dev tooling. Clean setup, not migration — install fresh from Homebrew, zero cruft.  
+**Used:** Mac setup · Day 0
 
 ### VS Code — `PRIMARY`
-Installed on Windows with WSL remote extension — confirmed working. Connects to WSL2 Ubuntu for Python/ML, native Windows for C#/.NET.  
-**Extensions:** Pylance · ESLint · Prettier · GitHub Copilot · REST Client · C# Dev Kit · WSL  
-**Used:** Sprint-wide · WSL extension confirmed
+Primary IDE for TypeScript and Python work. macOS native. Extensions: Pylance, ESLint, Prettier, GitHub Copilot, REST Client. Rider is an alternative for C# if preferred.  
+**Used:** Sprint-wide · all languages
 
 ---
 
 ## 09 · OS, Hardware & Local Environment
 
-### Windows 11 + WSL2 — `PRIMARY`
-Primary sprint environment. Windows native for C#/.NET, Azure tooling, SQL Server, Upwork client. WSL2 Ubuntu 24.04 for all Python/ML work. VS Code bridges both via WSL remote extension.
+### macOS (Apple Silicon) — `PRIMARY`
+Native Unix environment. Python tooling, Docker, HuggingFace, every tutorial — all work without workarounds. No WSL, no path hacks, no platform friction. The right OS for this sprint.
 
-### WSL2 Ubuntu 24.04 LTS — `PRIMARY`
-The Unix layer for all Python/ML work. Confirmed installed and working:
+### MacBook Pro M1 Pro 16GB — `PRIMARY`
+Current machine. Fully capable for Projects 1–3 — all API-based work, no local GPU required. P4 fine-tuning is workable with mlx-lm and quantised models; Colab Pro is the safety valve for heavier runs. Don't let hardware be a reason to delay starting.
 
-| Tool | Version |
-|---|---|
-| pyenv | 2.6.25 |
-| Python | 3.12.3 |
-| nvm | 0.40.1 |
-| Node | 24.14 LTS |
-| npm | 11.9.0 |
+### MacBook Pro (upgrade) / Mac Mini M4 Pro — `FUTURE`
+Either a MacBook Pro upgrade or a Mac Mini M4 Pro (48GB) would meaningfully expand local fine-tuning headroom post-sprint — 13B models unquantised, 7B with room to breathe, two models simultaneously. Not needed for the sprint. Worth revisiting after Day 90 based on where the work takes you.
 
-### Windows Laptop · RTX 5060 · 32GB RAM — `PRIMARY`
-Intel CPU + Nvidia RTX 5060 (8GB GDDR7 VRAM, Blackwell) + 32GB system RAM. CUDA-native for P4 fine-tuning — genuine throughput advantage over Apple Silicon. No new hardware needed.
+### Metal / mlx unified memory — `LEARN`
+Apple Silicon GPU acceleration via unified memory architecture. mlx-lm is optimised for this — outperforms PyTorch/MPS for local fine-tuning on M-series. Running Mistral-7B locally is realistic on 16GB with quantisation.
 
-### RTX 5060 + CUDA — `PRIMARY`
-8GB GDDR7 VRAM · Blackwell architecture · 5th-gen Tensor Cores · CUDA 12.x  
-HuggingFace, PyTorch, PEFT, bitsandbytes all target CUDA first. 8GB covers 7B QLoRA comfortably. Colab Pro is the safety valve for larger runs.
+### Homebrew + zsh — `PRIMARY`
+macOS package manager. Homebrew → nvm → pyenv → dotnet → Docker → VS Code. Clean setup, not migration. Half a day, zero cruft.
 
-### MacBook Pro M1 Pro 16GB — `SIDE BET`
-Fresh macOS install, held in reserve. Not needed for the sprint. Free optionality if circumstances change. Ready to configure in an afternoon.
-
-### Mac Mini M4 Pro / MacBook M5 Pro — `DEFERRED`
-Decision held until there's a real need — likely P4 if RTX 5060 VRAM becomes a genuine blocker. By then M5 Pro benchmarks will exist. Colab Pro handles the gap.
-
-> **WSL2 boundary rule — non-negotiable:** All Python and ML work runs inside WSL2. C#/.NET runs natively on Windows. TypeScript can run either side. Docker Desktop uses WSL2 backend. Crossing this boundary causes dependency conflicts — keep it clean.
+> **Memory note:** 16GB is tight for P4 fine-tuning but workable with 4-bit/8-bit quantised models. Colab Pro (~£10/month, A100 40GB) is the safety valve for any run that needs more. Subscribe at Day 55 — don't pay for it during P1–P3.
 
 ---
 
