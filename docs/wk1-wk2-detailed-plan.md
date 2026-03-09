@@ -83,13 +83,15 @@ In your chat route, add a comment above `convertToModelMessages()` explaining wh
 ## Session 3 — LangChain Landscape + Python ML Idioms
 **1.5h · Evening 3**
 
-**Open before you start:** nothing specific — this is the most conceptual session. Have a browser tab open on the [LangChain.js docs](https://js.langchain.com/docs/) for reference.
+**Open before you start:** nothing specific — this is the most conceptual session. Have a browser tab open on the [LangChain.js docs](https://docs.langchain.com/oss/javascript/langchain/overview) for reference.
 
 ### What to read/watch
-- **LangChain.js docs — [Introduction](https://js.langchain.com/docs/introduction/) + [Conceptual guide](https://js.langchain.com/docs/concepts/)** — 30 min  
+- **LangChain.js docs — [Overview](https://docs.langchain.com/oss/javascript/langchain/overview)** — 15 min  
   Don't build anything. Read to map the concepts: chains, retrievers, document loaders, text splitters. You've built all of these manually — LangChain just names them and gives you pre-built implementations.
-- **Full Stack LLM Bootcamp (Berkeley) — Lecture 1** — 45 min  
-  Free on YouTube. Watch at 1.25x. Good end-to-end mental model of the LLM app stack.
+- **LangGraph.js docs — [Overview](https://docs.langchain.com/oss/javascript/langgraph/overview)** — 15 min  
+  The conceptual/orchestration content has largely moved here. Skim for the mental model — you'll go deep on LangGraph in Wk 6.
+- **Andrej Karpathy — [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g)** — 1h (watch at 1.25x = ~48 min)  
+  The clearest first-principles explanation of how LLMs work. Covers inference, training, finetuning into an assistant, tool use, and the LLM-as-OS mental model. From the co-founder of OpenAI and former Tesla AI director. The fundamentals are fully current — focus on Parts 1 and 2 (first ~42 min); Part 3 on security is interesting but optional for this session.
 - **Python for Data Analysis (Wes McKinney) — Chapter 4 intro** — 15 min  
   Skim only. The goal is recognising NumPy array operations when you see them in ML code, not becoming a NumPy practitioner. You'll use this in Week 4's eval harness work and in P4.
 
